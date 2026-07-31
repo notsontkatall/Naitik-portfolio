@@ -1,5 +1,68 @@
 $(document).ready(function () {
 
+    const loaderScreen = document.getElementById('loaderScreen');
+    const pageShell = document.getElementById('pageShell');
+    const revealItems = document.querySelectorAll('.reveal-on-scroll');
+    const themeToggle = document.getElementById('themeToggle');
+    const body = document.body;
+    const savedTheme = localStorage.getItem('portfolio-theme');
+
+    body.classList.add('loading');
+
+    if (savedTheme === 'dark') {
+        body.classList.add('dark-theme');
+        if (themeToggle) {
+            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        }
+    }
+
+    const finishIntro = () => {
+        if (loaderScreen) {
+            loaderScreen.classList.add('hidden');
+        }
+        if (pageShell) {
+            pageShell.classList.add('ready');
+        }
+        body.classList.remove('loading');
+        revealItems.forEach((item, index) => {
+            setTimeout(() => item.classList.add('visible'), 120 + index * 120);
+        });
+    };
+
+    window.addEventListener('load', () => {
+        setTimeout(finishIntro, 800);
+    });
+
+    setTimeout(finishIntro, 2800);
+
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-theme');
+            const isDark = body.classList.contains('dark-theme');
+            localStorage.setItem('portfolio-theme', isDark ? 'dark' : 'light');
+            themeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        });
+    }
+
+    const cursorRing = document.getElementById('cursorRing');
+    const cursorDot = document.getElementById('cursorDot');
+    if (cursorRing && cursorDot) {
+        document.addEventListener('mousemove', (e) => {
+            cursorRing.style.left = `${e.clientX}px`;
+            cursorRing.style.top = `${e.clientY}px`;
+            cursorDot.style.left = `${e.clientX}px`;
+            cursorDot.style.top = `${e.clientY}px`;
+        });
+
+        document.addEventListener('mousedown', () => cursorDot.classList.add('active'));
+        document.addEventListener('mouseup', () => cursorDot.classList.remove('active'));
+
+        document.querySelectorAll('a, button, .tilt, .btn, img').forEach((el) => {
+            el.addEventListener('mouseenter', () => cursorRing.classList.add('hover'));
+            el.addEventListener('mouseleave', () => cursorRing.classList.remove('hover'));
+        });
+    }
+
     $('#menu').click(function () {
         $(this).toggleClass('fa-times');
         $('.navbar').toggleClass('nav-toggle');
@@ -59,7 +122,7 @@ $(document).ready(function () {
 document.addEventListener('visibilitychange',
     function () {
         if (document.visibilityState === "visible") {
-            document.title = "Portfolio | Jigar Sable";
+            document.title = "Portfolio | Naitik Modi";
             $("#favicon").attr("href", "assets/images/favicon.png");
         }
         else {
@@ -71,7 +134,7 @@ document.addEventListener('visibilitychange',
 
 // <!-- typed js effect starts -->
 var typed = new Typed(".typing-text", {
-    strings: ["frontend development", "backend development", "web designing", "android development", "web development"],
+    strings: ["frontend development", "web designing"],
     loop: true,
     typeSpeed: 50,
     backSpeed: 25,
@@ -160,16 +223,6 @@ VanillaTilt.init(document.querySelectorAll(".tilt"), {
 });
 // <!-- tilt js effect ends -->
 
-
-// pre loader start
-// function loader() {
-//     document.querySelector('.loader-container').classList.add('fade-out');
-// }
-// function fadeOut() {
-//     setInterval(loader, 500);
-// }
-// window.onload = fadeOut;
-// pre loader end
 
 // disable developer mode
 document.onkeydown = function (e) {

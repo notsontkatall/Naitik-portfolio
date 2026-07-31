@@ -40,7 +40,7 @@
         "icon": "https://img.icons8.com/glyph-neue/48/ffffff/github.png"
     },
     {
-        "name": "React",
-        "icon": "./assets/images/skills/react.svg"
+        "name": "Git",
+        "icon": "./assets/images/skills/git.svg"
     }
 ]
