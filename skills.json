@@ -1,7 +1,7 @@
 [
 {
         "name": "TailwindCSS",
-        "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Tailwind_CSS_Logo.svg/48px-Tailwind_CSS_Logo.png"
+        "icon": "/assets/images/skills/TailwindCSS.png"
     },
     {
         "name": "Bootstrap",
@@ -38,5 +38,9 @@
     {
         "name": "GitHub",
         "icon": "https://img.icons8.com/glyph-neue/48/ffffff/github.png"
+    },
+    {
+        "name": "React",
+        "icon": "./assets/images/skills/react.svg"
     }
 ]
